@@ -32,13 +32,29 @@ three cards hugged the left with a gap on the right instead of spreading evenly.
 
 ## Table-cell badges & status pills
 
-- **Status pills in data-table cells = Tabler SOFT badge variants**, not solid badges. The
-  `-lt` (light) variants read better in dense tables: `bg-success-lt` (green), `bg-danger-lt`
-  (red), `bg-warning-lt` (amber), `bg-secondary-lt` (grey/neutral) on a
-  `<span class="badge …">`. Establish one pattern and mirror it: a Yes/No boolean cell
-  uses `bg-success-lt`/`bg-danger-lt`, and new status cells follow suit (e.g. a job-run
-  status cell: success/failed/partial/skipped). (This install's cells: `LOCAL.md` beside this skill, when your copy keeps one —
+- **Status pills in data-table cells are soft badges, not solid ones, built from Bootstrap
+  5.3's opaque pair `bg-<color>-subtle` + `text-<color>-emphasis`**, e.g.
+  `<span class="badge bg-success-subtle text-success-emphasis">`. Use success (green),
+  danger (red), warning (amber) and secondary (grey/neutral). Establish one pattern and
+  mirror it: a Yes/No boolean cell uses the success/danger pair, and new status cells
+  follow suit (e.g. a job-run status cell: success/failed/partial/skipped). (This
+  install's cells: `LOCAL.md` beside this skill, when your copy keeps one —
   *layout-visuals.md — Table-cell badges*.)
+  - **Why not Tabler's `-lt` variants** (`bg-success-lt`…), which look the same: measured
+    on Tabler 1.5, every `-lt` badge fell between 2.5:1 and 4.4:1 in the light theme,
+    under WCAG AA's 4.5:1. They are 10%-alpha tints that aren't redefined for dark mode,
+    and inside a `.btn-outline-*` on hover the badge composites to its own text colour
+    (1.00:1). The `-subtle`/`-emphasis` pair is opaque and is redefined under
+    `[data-bs-theme="dark"]` (primary measured 10.58:1 light, 7.27:1 dark). v1.6 redefined
+    colours in `oklch()`, so re-measure before relying on either number.
+  - **The pair exists only for the theme colours** (primary, secondary, success, danger,
+    warning, info, light, dark). v1.6's `tabler.css` has no `bg-blue-subtle` or
+    `bg-cyan-subtle`, so map a palette colour to its theme colour, or define the extended
+    pair in the app's own CSS.
+  - **`-subtle` sets only the background.** Always pair it with the matching
+    `text-*-emphasis`. `-lt` set both, so a blind `-lt` → `-subtle` rename ships grey text.
+  - **Write both class names as literals.** PurgeCSS keeps them only while the full name
+    appears in source (the dynamic-class rule in [components-js.md](components-js.md)).
 - **Mapping an enum value → badge class: key the map by the STRING value, do NOT import the
   enum.** A workspace types package's runtime enum imports can crash Vue SFCs
   (reflect-metadata), so build the value→class lookup off raw string keys instead of the
@@ -71,7 +87,7 @@ it. (This install's files: `LOCAL.md` beside this skill, when your copy keeps on
 - `tabler-marketing.css` ships a `.hero-subheader` class, but it's an **uppercase, 0.75rem,
   secondary-color** eyebrow — do NOT reuse it for a mixed-case, primary-colored eyebrow; it'll
   look wrong (caps + tiny + gray).
-- A subheader `<div>` placed **inside** `h1.hero-title` inherits the title's 3rem/black, so it
+- A subheader `<div>` placed **inside** `h1.hero-title` inherits the title's 3rem/bold, so it
   renders as large as the title. To make a primary-colored eyebrow that's smaller than the title
   with spacing below, put Tabler utilities on the div: `class="text-primary fs-1 fw-semibold mb-3"`
   (`fs-1`≈1.5rem vs the 3rem title — `fs-2`/1.25rem read a touch small; `mb-3` adds the gap).
@@ -79,8 +95,10 @@ it. (This install's files: `LOCAL.md` beside this skill, when your copy keeps on
 
 ## Custom icon in a `.shape` badge must be a SQUARE 24×24 Tabler-style glyph
 
-`.shape .icon` forces the icon to a **square** box (`width:height:var(--tblr-shape-icon-size)`,
-e.g. 1.5rem). Tabler's own icons are 24×24 so they fill it. A custom **wide** icon (e.g. an old
+`.shape` lives in `tabler-marketing.css`, not `tabler.css`, so a page that loads only the
+core stylesheet gets no badge at all. `.shape .icon` forces the icon to a **square** box
+(`width:height:var(--tblr-shape-icon-size)`, 1.5rem by default; the `.shape-xxs`…`.shape-xl`
+sizes change it). Tabler's own icons are 24×24 so they fill it. A custom **wide** icon (e.g. an old
 `IconUserCar`, viewBox `0 0 48 24` — user + car side by side) keeps its aspect ratio and scales to
 fit the square's *width*, so it renders at ~half height — visibly smaller than its neighbors.
 

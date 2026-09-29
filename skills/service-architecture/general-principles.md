@@ -20,6 +20,21 @@ copy keeps one — *general-principles examples*.
   (new URL + correct auth + docs + tests), keep delegating to the legacy engine under the
   hood when reimplementing it is large/risky, then delete the old endpoint after confirming
   nothing else uses it.
+- **🚨 A fix to a route that exists in two services is UNVERIFIED until a live request proves
+  which service answers that path.** Mid-migration, the same controller exists in the legacy
+  service and its replacement, and only one is actually routed. Nothing in the usual pipeline
+  catches the wrong one: the ticket names files, the build compiles them, CI tests them, the
+  local gate passes, and the fix ships having changed a copy that serves no traffic — while the
+  bug stays live. Reviewing the diff cannot detect this, because the diff is correct.
+  **Three checks, each one request, and all three are needed** — a single 404 proves nothing,
+  since an unrouted service and a wrong path look identical:
+  1. a route declared ONLY in service A → expect it served (401/200, not 404);
+  2. a route declared ONLY in service B → expect 404 if B is unrouted;
+  3. B's own health/status path under its global prefix → 404 confirms B answers nothing.
+  Then read the routing config rather than inferring it: a host-qualified route registration
+  beats a path-only one, so the service with `urlprefix-<host>/` wins every path the
+  path-only service also claims. (This install's case: `LOCAL.md` beside this skill, when your
+  copy keeps one — *general-principles examples*.)
 - **Boot-time registration over data migrations** for things like permissions/roles —
   but gate it (advisory lock to serialize instances + content-hash "skip if unchanged")
   so it doesn't write on every boot.
@@ -39,6 +54,13 @@ copy keeps one — *general-principles examples*.
   Discovery beats guessing — and a wrong guess in the plan costs more than the grep. (This
   install's worked example: `LOCAL.md` beside this skill, when your copy keeps one —
   *general-principles examples*.)
+  - **Corollary — a ticket saying "port X from service Y" is a claim about the target, so grep
+    the target first.** A defect described as *missing* infrastructure is frequently *unused*
+    infrastructure: the validator is registered, the base class already carries the decorator,
+    and a sibling route two lines away already does it right. Porting then adds a second way of
+    doing what the file already did once. **Two routes on one controller handling the same id
+    differently is a finding, not a style difference** — the one that does it right is both the
+    proof and the template, and the change is usually far smaller than the ticket implies.
 - **Derive a classification from an existing FK/column instead of adding a column + migration.**
   `is_active` computed as `deactivated_at IS NULL`, not stored — zero migration, always
   consistent, "every existing row starts active" holds for free. Prefer a derived read-side

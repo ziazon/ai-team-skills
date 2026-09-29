@@ -57,7 +57,9 @@ user gets professional-looking results without having to drive the aesthetics.
 
 - **Status color semantics are fixed:** success = green, failed/error = red,
   partial/in-between = amber/yellow, skipped/neutral = grey. Render statuses in tables as
-  colored pills/badges in a **soft/muted** tone (Tabler `-lt` variants), never loud
+  colored pills/badges in a **soft/muted** tone (the opaque `bg-*-subtle` +
+  `text-*-emphasis` pair; Tabler's `-lt` tints fail AA contrast, see
+  [tabler-ui's layout-visuals.md](../tabler-ui/layout-visuals.md)), never loud
   full-saturation, never plain text — soft pills stay readable in dense tables.
 - **Never use color alone to convey state** — pair it with text or an icon (a red pill also
   reads "Failed"), so state survives color-blindness and greyscale.

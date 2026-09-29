@@ -48,7 +48,9 @@ range, select, multi-select and toggle fields, plus currency / password / rich-t
   give the field a way to suppress its own label text so it isn't duplicated.
 - **Date field** — single date via `@vuepic/vue-datepicker`; model is a `yyyy-MM-dd`
   string in UTC, with a separate date-range field for from/to. (Distinct from the
-  read-only date display below, which is for rendering, not input.)
+  read-only date display below, which is for rendering, not input.) Tabler v1.6 ships its
+  own vanilla-JS Datepicker. Keep the Vue date field; the reasons are in the JS-components
+  entry of [components-js.md](components-js.md).
 - **Widget-by-type pattern** — drive the right widget off a field's declared type:
   enum → multi-select, boolean → toggle, date → date field, number → number field,
   text → text field. Keeps a generic builder (e.g. a filter panel) data-driven instead
@@ -87,8 +89,9 @@ and files: `LOCAL.md` beside this skill, when your copy keeps one — *forms-fil
 
 ## Filter chip bar — a teleported popover per chip
 
-Airtable/Linear-style filter bar: applied filters as removable `bg-blue-lt` badge
-**chips** + a dashed "+ Add filter" button, each opening a popover. (This install's
+Airtable/Linear-style filter bar: applied filters as removable soft badge **chips**
+(`bg-primary-subtle text-primary-emphasis`, not `bg-blue-lt`; the contrast reason is in
+layout-visuals.md) + a dashed "+ Add filter" button, each opening a popover. (This install's
 component names and ticket: `LOCAL.md` beside this skill, when your copy keeps one — *forms-filters.md — Filter chip bar*.)
 
 - **Anchor each popover with its own teleported dropdown** (see the dropdowns entry in

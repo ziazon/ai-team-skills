@@ -7,7 +7,11 @@ beside this skill, when your copy keeps one.)
 ## Tabler transactional emails
 
 Tabler's email templates ship as inlined `compiled.html` bodies; an app that sends them
-through an email service keeps those bodies as its templates. Design learnings:
+through an email service keeps those bodies as its templates. Each template folder in the
+bundle's `tabler-emails/emails/` also carries a **dark variant** (`compiled-dark.html`),
+the un-inlined `source.html`/`source-dark.html`, and desktop and mobile screenshots for
+both themes. For a dark-themed email, start from `compiled-dark.html` rather than inverting
+the light body by hand. Design learnings:
 
 - **Logo imagery = reuse the app's already-public PNG, don't host a new asset.** If the
   app already serves its brand mark as a PNG at a public absolute URL (e.g. the login
@@ -36,7 +40,7 @@ skill, when your copy keeps one — *emails-other-stacks.md — Tabler transacti
 Tabler used as plain CSS over server-rendered htmltools tags (`div()`, `tags$…`); no reactive-JS-component conflicts here, but htmltools/text gotchas instead.
 
 - **htmltools inserts whitespace between sibling tags → the browser renders it as a visible space.** `tagList(tags$strong("C"), "hallenging")` shows "C hallenging" (the source newline collapses to a space). For inline letter/word emphasis *inside* a word, build ONE HTML string and wrap with `HTML(...)`; escape the surrounding (translated) text with `htmltools::htmlEscape()` and swap only the known literal. Do NOT assemble inline runs as separate `tagList` children.
-- **Tabler marketing type scale** (from `tabler-marketing.css`; available when the app's stylesheet `@import`s the Tabler bundles): `.hero-title` 3rem/black weight (responsive 2rem ≤768px); `.hero-description` = h2 (1.25rem), centered, `margin:0 auto; max-width:45rem` (`.hero-description-wide` = 61.875rem); `.section-title` = h1 (1.5rem/bold); `.section-description` = h3 (1rem). Utilities: `.fs-1`=1.5rem, `.fs-2`=1.25rem, `.fs-3`=1rem. **To make a section's header+body match the hero, use `.hero-title` + `.fs-2`.**
+- **Tabler marketing type scale** (from `tabler-marketing.css`, re-verified against v1.6.0; available when the app's stylesheet `@import`s the Tabler bundles): `.hero-title` 3rem/bold (700, `letter-spacing:-0.04em`; responsive 2rem <768px); `.hero-description` = h2 (1.25rem, drops to h3/1rem <576px), centered, `margin:0 auto; max-width:45rem` (`.hero-description-wide` = 61.875rem); `.section-title` = h1 (1.5rem/semibold; `.section-title-lg` = 2rem); `.section-description` = h3 (1rem). Utilities: `.fs-1`=1.5rem, `.fs-2`=1.25rem, `.fs-3`=1rem. **To make a section's header+body match the hero, use `.hero-title` + `.fs-2`.**
 - **Beat Tabler's `img` rules with inline `style`** — logos size via inline `style="max-width:NNpx;height:auto"`; Tabler's `img` CSS otherwise wins.
 - **Progressive enhancement from R:** emit a `div` carrying `data-*` attributes (e.g. a comma-joined list of labels to show) and let a page JS module enhance it; gating a card on data = just omit the `div` in the R `if`.
 

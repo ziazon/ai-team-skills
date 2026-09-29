@@ -32,6 +32,7 @@ dead carousels, unstyled prod buttons):
 | Form inputs, validation display, filter UIs (operator pickers, chip bars), date display | [forms-filters.md](forms-filters.md) — the generic vuelidate-wired field widgets and their model quirks |
 | Grid/column layout, badges/status pills, icons, table empty/error states, hero/eyebrow type | [layout-visuals.md](layout-visuals.md) |
 | Email templates or a non-Vue Tabler stack (R/Shiny) | [emails-other-stacks.md](emails-other-stacks.md) |
+| Copying markup from the reference bundle, upgrading `@tabler/core`, a Tabler class or `--tblr-*` token that does nothing, or any v1.6 component (datepicker, OTP, sparkline, legend…) | [versions.md](versions.md) — bundle-vs-app version gap, and the v1.6 changes that bite |
 
 `LEARNINGS.md` beside this skill, when your copy keeps one, holds only raw,
 not-yet-promoted captures — check it too when working in an area touched recently.
@@ -41,7 +42,9 @@ not-yet-promoted captures — check it too when working in an area touched recen
 - **Know the toolbox.** Tabler provides cards, page header/body, steps/wizards, tables,
   forms (form-control/form-select/form-check + validation states), buttons, badges,
   alerts, empty states, input groups/icons, navs/tabs, offcanvas, dropdowns, modals,
-  datagrid, status/avatars, and a large utility layer. Compose these rather than
+  datagrid, status/avatars, and a large utility layer. v1.6 added a datepicker, OTP
+  input, password-strength meter, sparklines, legends, signal bars, clipboard buttons
+  and confetti (see versions.md before using any of them). Compose these rather than
   hand-rolling; lean on the utility classes for spacing/layout.
 - **Check the reference templates for UX shape.** Before designing a screen's layout,
   look at the official Tabler template bundle you downloaded from tabler.io (its admin
@@ -51,7 +54,11 @@ not-yet-promoted captures — check it too when working in an area touched recen
   folder names **unversioned**: upgrade the bundle in place and never write a version
   into a path, or every citation of it goes stale on the next upgrade. (This install's
   path and version: `LOCAL.md` beside this skill, when your copy keeps one —
-  *Reference templates*.)
+  *Reference templates*.) For a quick look without the bundle, or to point someone who
+  doesn't have it at an example, use the public live preview:
+  <https://tabler.io/admin-template/preview>. **The bundle and the preview track the
+  newest Tabler; the app may not.** Compare versions before copying markup, because a
+  class the app's Tabler lacks renders unstyled with no error ([versions.md](versions.md)).
 - **Match the existing app.** Read neighboring components and reuse the same Tabler
   patterns/wrappers already in the codebase (your app's modal wrapper, teleported
   dropdown and shared form fields) before introducing new ones — a second pattern for
@@ -73,8 +80,11 @@ not-yet-promoted captures — check it too when working in an area touched recen
 
 ## Common failure modes
 
-- **Reaching for `data-bs-*` attributes for anything stateful** (modal, dropdown,
-  carousel) — stop; the Vue-native replacement is in components-js.md.
+- **Reaching for `data-bs-*` (or its v1.6 alias `data-tblr-*`) attributes for anything
+  stateful** (modal, dropdown, carousel, datepicker, OTP) — stop; the Vue-native
+  replacement or the lifecycle-owned pattern is in components-js.md.
+- **Copying bundle markup into an app on an older Tabler** — the new class renders
+  unstyled and nothing errors (versions.md).
 - **`col-lg-3` on a 3-tile row** — 12-wide grid: the class must be 12 ÷ tile-count, or
   the row leaves a dangling empty slot (layout-visuals.md).
 - **Hand-rolling a raw `form-control` input** when the app already ships shared,
@@ -89,7 +99,8 @@ not-yet-promoted captures — check it too when working in an area touched recen
 ## Before you call this done
 
 - [ ] Checked the relevant reference file(s) before using any interactive component.
-- [ ] Consulted the downloaded Tabler template bundle when shaping new UX.
+- [ ] Consulted the downloaded Tabler template bundle when shaping new UX, and checked
+      that anything copied from it exists in the app's installed Tabler version.
 - [ ] Reused the app's existing wrappers (modal, dropdown, shared form fields).
 - [ ] Verified in BOTH light and dark mode, with inline screenshots.
 - [ ] If class names are composed dynamically: verified against the BUILT output.

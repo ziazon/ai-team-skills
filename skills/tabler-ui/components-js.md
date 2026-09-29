@@ -7,7 +7,7 @@ component names: `LOCAL.md` beside this skill, when your copy keeps one.)
 
 ## Contents
 
-- [Modals](#modals) · [Dropdowns in overflow containers](#dropdowns-inside-scrolloverflow-containers-esp-data-tables) · [Carousel](#carousel) · [tabler.min.js](#tablerminjs)
+- [Modals](#modals) · [Dropdowns in overflow containers](#dropdowns-inside-scrolloverflow-containers-esp-data-tables) · [Carousel](#carousel) · [Tabler's own JS components](#tablers-own-js-components-datepicker-otp-strength-sortable) · [tabler.min.js](#tablerminjs)
 - [PurgeCSS strips dynamically-composed class names](#dynamiccomposed-tabler-class-names-in-production-builds-purgecss)
 - [Stacking / z-index](#stacking--z-index-gotchas-tabler--vue-final-modal) · [Confirmation dialogs](#confirmation-dialogs) · [Action-item conditions](#action-menu-condition-filtering) · [Theme toggle placement](#theme-toggle-responsive-gotcha)
 
@@ -33,7 +33,27 @@ Do NOT use Tabler/Bootstrap's vanilla dropdown (`data-bs-toggle="dropdown"`) for
 
 ## Carousel
 
-Do NOT rely on Tabler/Bootstrap's `data-bs-ride="carousel"` data-api to auto-cycle in an SSR-hydrated SPA — the data-api only inits carousels on the `window.load` event against the server-rendered DOM. It "works" on first load but breaks when Vue re-renders the carousel subtree (e.g. **dark mode**: a theme loader that reads local storage flips `data-bs-theme` before mount → theme-reactive image `src`s make Vue patch the subtree during hydration → the data-api's carousel instance desyncs → cycling stops). Light mode never re-renders, so the bug is dark-mode-only and easy to miss. (This install's case: `LOCAL.md` beside this skill, when your copy keeps one — *components-js.md — Carousel*.) USE explicit lifecycle ownership: construct `new (window as any).bootstrap.Carousel(el, { interval: 4000, ride: 'carousel' })` in `onMounted` (post-hydration, on Vue-controlled nodes) and `.dispose()` in `onBeforeUnmount`. Also note `data-interval` is stale BS4 syntax — BS5 wants `data-bs-interval`, or just pass `{ interval }` to the JS ctor. (`window.bootstrap` is exposed by tabler.min.js — `t.bootstrap = vo`, with `Carousel`, `Modal`, etc.)
+Do NOT rely on Tabler/Bootstrap's `data-bs-ride="carousel"` data-api to auto-cycle in an SSR-hydrated SPA — the data-api only inits carousels on the `window.load` event against the server-rendered DOM. It "works" on first load but breaks when Vue re-renders the carousel subtree (e.g. **dark mode**: a theme loader that reads local storage flips `data-bs-theme` before mount → theme-reactive image `src`s make Vue patch the subtree during hydration → the data-api's carousel instance desyncs → cycling stops). Light mode never re-renders, so the bug is dark-mode-only and easy to miss. (This install's case: `LOCAL.md` beside this skill, when your copy keeps one — *components-js.md — Carousel*.) USE explicit lifecycle ownership: construct the carousel in `onMounted` (post-hydration, on Vue-controlled nodes) and `.dispose()` it in `onBeforeUnmount`. Also note `data-interval` is stale BS4 syntax — BS5 wants `data-bs-interval`, or just pass `{ interval }` to the JS ctor.
+
+🚨 **Get `Carousel` (or `Modal`, …) by importing it, never from `window.bootstrap`. Tabler never sets that global.** Its UMD wrapper takes the CommonJS branch under any bundler (`typeof exports === 'object'`), so `import '@tabler/core/dist/js/tabler.min.js'` writes to `exports.bootstrap` and leaves `window` untouched. Loaded as a plain `<script>`, it sets `window.tabler` (with `.bootstrap` inside it), still not `window.bootstrap`. Read the wrapper's `factory(global.tabler = {})` line before trusting any global. The older advice here, `new (window as any).bootstrap.Carousel(...)`, was dead code: a `?.` guard turned the missing global into "never construct", and a spec that set `window.bootstrap` itself stayed green (this install's case: `LOCAL.md` beside this skill, when your copy keeps one — *components-js.md — Carousel*). What to do instead:
+- Load `@tabler/core`'s ES-module build (its `module` field, `dist/js/tabler.esm.js`, with types; present since at least 1.5.1) **once** from the client entry, then import named exports from it. Loading the UMD file and the ESM file together puts two Bootstrap copies in the page, and each copy's data-api click handler acts on every click.
+- That module calls `EventHandler.on(document, …)` as soon as it is evaluated. A component that also renders on the server must therefore `const { Carousel } = await import('@tabler/core')` inside `onMounted`, and check that it was not unmounted while the import was in flight. `import type { Carousel } from '@tabler/core'` at the top of the file is fine. Pin this with a spec that renders the component with `renderToString` in a node (no-DOM) test environment.
+
+## Tabler's own JS components (datepicker, OTP, strength, sortable…)
+
+v1.6 made Datepicker, OtpInput, Strength, Clipboard, Sparkline, Confetti, Autosize, CountUp,
+InputMask, Sortable and SwitchIcon into Bootstrap-style components (`class … extends
+BaseComponent`, with `getOrCreateInstance()` and `dispose()`). Do NOT rely on their
+`data-bs-*`/`data-tblr-*` auto-init in Vue. Auto-init is a one-shot scan of the DOM
+(`initAll`) when the page loads, so an element Vue renders later is never initialized. A
+few components, Datepicker among them, also initialize lazily on click or focus through
+handlers delegated from `document`. Those appear to work, but nothing disposes the instance
+when Vue unmounts or re-renders the element, which is the carousel desync above in another
+form. USE a Vue-native equivalent where the app already has one (its date field, for
+example). Otherwise own the lifecycle: `Plugin.getOrCreateInstance(el, config)` in
+`onMounted`, `.dispose()` in `onBeforeUnmount`, and no `data-*-toggle` on the element.
+Check [versions.md](versions.md) first: an app on an older Tabler doesn't have these
+components.
 
 ## tabler.min.js
 

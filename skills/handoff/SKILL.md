@@ -90,8 +90,8 @@ remembered state instead of the true one. After a compaction, or alongside a
 concurrent session, **the disk is routinely ahead of your in-context narrative.**
 
 - **Open the handoff by re-querying git and PR state**, before writing any status
-  and before any reset or force-push: `git fetch`, `git log --oneline origin/main
-  -10`, `git rev-parse HEAD origin/<branch>`, `gh pr list`. The in-chat story once
+  and before any reset or force-push: `git fetch`,
+  `git log --oneline -10 origin/main`, `git rev-parse HEAD origin/<branch>`, `gh pr list`. The in-chat story once
   said "1.3 not started" while `git log` showed 1.3a merged and 1.3b committed.
   Another session wrote "Phases B & C remaining" when other sessions had already
   merged both — handing that off would have sent someone to rebuild finished work.

@@ -11,7 +11,6 @@
 #   lh-audit.sh <url> [desktop|mobile|both] [outdir]
 #
 # Examples:
-#   lh-audit.sh https://staging.example.com/ desktop
 #   lh-audit.sh http://127.0.0.1:8083/ both ./.lighthouse
 #
 # Requires: node, Google Chrome, and the `lighthouse` CLI on PATH (install it
@@ -24,7 +23,7 @@ set -euo pipefail
 
 URL="${1:?usage: lh-audit.sh <url> [desktop|mobile|both] [outdir]}"
 FORM="${2:-both}"
-OUTDIR="${3:-${PWD}/.lighthouse}"
+OUTDIR="${3:-./.lighthouse}"
 STAMP="$(date +%Y%m%d-%H%M%S)"
 SLUG="$(printf '%s' "$URL" | sed -E 's#https?://##; s#[^a-zA-Z0-9]+#-#g; s#-+$##')"
 

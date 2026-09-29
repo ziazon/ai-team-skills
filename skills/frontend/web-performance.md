@@ -40,7 +40,7 @@ scripts/lh-audit.sh <url> [desktop|mobile|both] [outdir]
 # e.g. scripts/lh-audit.sh https://staging.example.com/ both ./.lighthouse
 ```
 
-It runs `npx lighthouse` with a **pinned config**, saves timestamped JSON+HTML per form-factor,
+It runs a locally installed `lighthouse` CLI (it never downloads one) with a **pinned config**, saves timestamped JSON+HTML per form-factor,
 and prints category scores, Core Web Vitals, and the top failing audits ranked by estimated
 savings. Parse the `.report.json` for detail; open the `.report.html` for the full panel view.
 

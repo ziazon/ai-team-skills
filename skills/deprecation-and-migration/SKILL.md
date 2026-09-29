@@ -91,7 +91,7 @@ Don't deprecate without a working alternative. The replacement must:
 ### Migration Guide
 1. Replace `import { client } from 'old-service'` with `import { client } from 'new-service'`
 2. Update configuration (see examples below)
-3. Run the migration verification script: `npx migrate-check`
+3. Run the migration verification script: `npm run migrate:check`
 ```
 
 ### Step 3: Migrate Incrementally

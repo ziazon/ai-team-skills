@@ -10,7 +10,7 @@ Publishing `@yourscope/*` to GitHub Packages (`npm.pkg.github.com`) needs a **cl
 
 ## [pattern] GitHub-Actions-style secret masking for token commands `[seen: 2026-06-29]`
 
-When running commands that touch a token (registry auth, API calls, reading `.npmrc`), pipe every stream through a **pattern-based** redactor so a value can't leak to the log — and make it pattern-based (not value-based) so it never has to handle the secret itself. Masks: `github_pat_…`, `gh[pousr]_…` (classic/app/oauth/server/refresh/user), `_authToken=…`, `Authorization: (Bearer|token) …`, `x-access-token:…@`. Combine with the never-print discipline: source `.envrc` (`set -a; . ./.envrc; set +a`), reference `$GITHUB_TOKEN` by name, presence-check with `[ -n "$VAR" ]`, and test token *capability* (read / `npm publish --dry-run`) rather than printing it — dry-run packs + auth-checks without a permanent upload.
+When running commands that touch a token (registry auth, API calls, reading `.npmrc`), pipe every stream through a **pattern-based** redactor so a value can't leak to the log — and make it pattern-based (not value-based) so it never has to handle the secret itself. Masks: `github_pat_…`, `gh[pousr]_…` (classic/app/oauth/server/refresh/user), `_authToken=…`, `Authorization: (Bearer|token) …`, `x-access-token:…@`. Combine with the never-print discipline: source `.envrc` (`set -a; . ./.envrc; set +a`), let the consuming tool read the token by its variable name, presence-check with `[ -n "$VAR" ]`, and test token *capability* (read / `npm publish --dry-run`) rather than printing it — dry-run packs + auth-checks without a permanent upload.
 
 ## [GitHub/gh] `gh pr edit` fails on Projects-classic deprecation
 

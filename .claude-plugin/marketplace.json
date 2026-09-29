@@ -1,14 +1,14 @@
 {
-  "name": "ai-team-skills",
+  "name": "zizi-skills",
   "owner": {
     "name": "Zia Saidi"
   },
   "metadata": {
-    "description": "The public export of the ai-team skill library."
+    "description": "A skill library for disciplined software work."
   },
   "plugins": [
     {
-      "name": "ai-team",
+      "name": "zizi-skills",
       "source": "./",
       "description": "A skill library for disciplined software work: planning, test-first implementation, code and security review, git hygiene, and session handoff."
     }

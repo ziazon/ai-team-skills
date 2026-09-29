@@ -1,12 +1,12 @@
 {
-  "name": "ai-team",
-  "version": "0.1.0",
-  "description": "A skill library for disciplined software work: planning, test-first implementation, code and security review, git hygiene, and session handoff. Invoked as ai-team:<skill> once installed.",
+  "name": "zizi-skills",
+  "version": "0.2.0",
+  "description": "A skill library for disciplined software work: planning, test-first implementation, code and security review, git hygiene, and session handoff. Invoked as zizi-skills:<skill> once installed.",
   "author": {
     "name": "Zia Saidi"
   },
-  "homepage": "https://github.com/ziazon/ai-team-skills",
-  "repository": "https://github.com/ziazon/ai-team-skills",
+  "homepage": "https://github.com/ziazon/zizi-skills",
+  "repository": "https://github.com/ziazon/zizi-skills",
   "license": "MIT",
   "keywords": [
     "skills",

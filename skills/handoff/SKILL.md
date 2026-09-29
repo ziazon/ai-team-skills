@@ -247,6 +247,9 @@ record:
   depends on it.
 - A project with no note yet: create one following an existing note's shape and
   link it from the atlas's home note.
+- When the atlas is an LLM-compiled wiki (the LLM-knowledge-base pattern: raw
+  records compiled into linked pages with an index), also file the session's durable
+  decisions and lessons into it from their raw records, then run its lint.
 
 This is a summary-level refresh from what the session already knows — do NOT
 launch repo-wide research for it. (A full re-research sweep is a separate,

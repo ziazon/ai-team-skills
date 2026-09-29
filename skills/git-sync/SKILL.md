@@ -164,7 +164,7 @@ continued existence are all assumptions that quietly fail.
 **Starting work on a branch:**
 
 ```sh
-git rev-parse --abbrev-ref HEAD          # confirm which branch you're on (gate 1!)
+git rev-parse --abbrev-ref HEAD          # confirm which branch you're on (gate 1)
 git fetch origin main:main               # refresh main (no checkout)
 git rebase main                          # (or rebase onto the dependency branch)
 git push --force-with-lease origin HEAD  # only if the rebase moved commits
@@ -225,7 +225,7 @@ git for-each-ref --format='%(refname:short) %(upstream:track)' refs/heads \
 #     worktree still holds is refused too. Both are the safety net, so this can't
 #     eat unpushed work (an unpushed plan branch has commits ahead of main → excluded).
 git branch --merged origin/main --format='%(refname:short) %(upstream)' \
-  | awk '$2=="" && $1!="main"{print $1}' \
+  | awk '$1=="main"{next} $2==""{print $1}' \
   | while read -r b; do git branch -d "$b"; done
 # remove CLEAN worktrees whose branch is merged (background; plain remove)
 git worktree prune

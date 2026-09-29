@@ -19,9 +19,10 @@ debugging a Gemini integration. Companion to [codex.md](codex.md) (the other age
 - **`~/.gemini/.env`** is the CLI's **global** env home (loaded for every project, not scoped to
   a repo). Put `GEMINI_API_KEY=...` there, `chmod 600`. Write it with no-echo
   `read -rs "k?…"` so the value never hits screen or shell history.
-- **List models without leaking the key:** `curl -H "x-goog-api-key: $GEMINI_API_KEY"
-  https://generativelanguage.googleapis.com/v1beta/models` — key in a **header, never the
-  `?key=` URL param** (never secrets in URLs). Source the env file into the process, don't echo.
+- **Check the key works without leaking it:** the user runs the models-list request
+  (`GET https://generativelanguage.googleapis.com/v1beta/models`) themselves, with the key in the
+  `x-goog-api-key` **header, never the `?key=` URL param** (never secrets in URLs). An agent does
+  not read the key out of the environment to send it anywhere; it asks the user to run the check.
 - `settings.json`: default model = `model.name`; auth mode = `security.auth.selectedType`
   (`"gemini-api-key"`). Global context file = `~/.gemini/GEMINI.md` (loads in `-p` headless too).
 

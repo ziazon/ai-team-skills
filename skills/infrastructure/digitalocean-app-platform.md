@@ -25,9 +25,10 @@ App Platform (Dockerfile service + managed Postgres + PRE_DEPLOY jobs), Terrafor
   doctl use that token over the selected context — but in this session `doctl account get` with the env
   token **misreported the wrong account** (showed a different context's account than the token actually
   belonged to). Cost a big false-alarm detour ("provisioned into the wrong account").
-- **Ground truth for "which account does THIS token belong to":** hit the raw API, which is exactly what
-  the Terraform provider does — `curl -s -H "Authorization: Bearer $TOKEN" https://api.digitalocean.com/v2/account`
-  → `.account.email` / `.uuid`. Trust this over `doctl account get`.
+- **Ground truth for "which account does THIS token belong to":** the raw API, which is exactly what
+  the Terraform provider calls — `GET https://api.digitalocean.com/v2/account` with the token as a bearer
+  `Authorization` header → `.account.email` / `.uuid`. Trust this over `doctl account get`. The user runs
+  that request; an agent does not read the token out of the environment to send it.
 - **Rules for multi-account doctl:** ALWAYS pass an explicit `--context <name>`; do NOT rely on the
   env-token path; never assume the "current" context. Terraform's `digitalocean` provider reads its own
   `token` (var), independent of doctl context — so the token in your tfvars is what determines the target account.

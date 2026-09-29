@@ -1,4 +1,4 @@
-# ai-team skills
+# zizi-skills
 
 A Claude Code plugin of skills for disciplined software work: planning before
 building, test-first implementation, code and security review, git hygiene,
@@ -8,12 +8,12 @@ orchestrating sub-agents, and handing a session off cleanly. Each skill is a
 ## Install
 
 ```bash
-claude plugin marketplace add ziazon/ai-team-skills
-claude plugin install ai-team@ai-team-skills
+claude plugin marketplace add ziazon/zizi-skills
+claude plugin install zizi-skills@zizi-skills
 ```
 
 Skills load on their own when a task matches their description. You can also
-name one directly as `ai-team:<skill>`, for example `ai-team:planning`.
+name one directly as `zizi-skills:<skill>`, for example `zizi-skills:planning`.
 
 ## Files a skill may mention that are not here
 

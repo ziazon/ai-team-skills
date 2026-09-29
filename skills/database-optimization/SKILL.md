@@ -105,8 +105,9 @@ Each of these passed unit tests and failed against a real database. Details live
    dev ran PG15+ while staging and prod ran **14**, so a `UNIQUE NULLS NOT DISTINCT`
    migration passed unit tests *and* a real local `migrate`, then failed the staging
    prestart with `syntax error at or near "NULLS"` — and the service **auto-reverted**,
-   producing a no-op deploy that looked deployed-but-stale. While staging is 14, ban
-   `MERGE`, `NULLS NOT DISTINCT`, FK `SET NULL (col_list)`, and security-invoker views.
+   producing a no-op deploy that looked deployed-but-stale. Whenever the deployed major
+   is older than local, ban the newer major's syntax (on 14 that was `MERGE`,
+   `NULLS NOT DISTINCT`, FK `SET NULL (col_list)`, and security-invoker views).
    When unsure a migration is portable, `SELECT version()` on the target before trusting
    a local pass. A failed `migrate` task is a **release failure, not a skip**.
 9. **A session timezone mismatch silently zeroes timestamptz-vs-naive comparisons.**

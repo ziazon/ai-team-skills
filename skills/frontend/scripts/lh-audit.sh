@@ -14,7 +14,8 @@
 #   lh-audit.sh https://staging.example.com/ desktop
 #   lh-audit.sh http://127.0.0.1:8083/ both ./.lighthouse
 #
-# Requires: node + npx (fetches `lighthouse` on first run) and Google Chrome.
+# Requires: node, Google Chrome, and the `lighthouse` CLI on PATH (install it
+# yourself, e.g. `npm install -g lighthouse`; this script never downloads it).
 # Outputs timestamped JSON + HTML per form-factor into <outdir> and prints:
 #   category scores (Perf/A11y/BP/SEO), the Core Web Vitals metrics, and the top
 #   opportunities/diagnostics ranked by estimated savings.
@@ -26,6 +27,11 @@ FORM="${2:-both}"
 OUTDIR="${3:-${PWD}/.lighthouse}"
 STAMP="$(date +%Y%m%d-%H%M%S)"
 SLUG="$(printf '%s' "$URL" | sed -E 's#https?://##; s#[^a-zA-Z0-9]+#-#g; s#-+$##')"
+
+command -v lighthouse >/dev/null 2>&1 || {
+  echo "lh-audit.sh: the lighthouse CLI is not on PATH; install it first (e.g. npm install -g lighthouse)" >&2
+  exit 1
+}
 
 mkdir -p "$OUTDIR"
 
@@ -42,7 +48,7 @@ run_one() {
                --chrome-flags="--headless=new --no-extensions --no-sandbox"
                --quiet)
   [ "$preset" = "desktop" ] && flags+=(--preset=desktop)
-  npx --yes lighthouse "$URL" "${flags[@]}" >/dev/null
+  lighthouse "$URL" "${flags[@]}" >/dev/null
 
   # Lighthouse writes <base>.report.json / <base>.report.html
   node - "$base" "$preset" <<'NODE'

@@ -151,3 +151,18 @@ shipped, so drift is caught at the source.
 - Backups must be lazy, collision-safe, separated by destination tool, and
   idempotent. Verification should accept partial tool installations and check
   exact nonbroken targets rather than merely testing that a path is a symlink.
+
+## [Claude Code] launchd self-updater for a locally built app (2026-09-29)
+
+This covers a LaunchAgent that rebuilds and installs a desktop app into `/Applications` whenever `origin/main` changes it.
+- **Fingerprint the inputs, not the checkout:** `git rev-parse origin/main:<subdir>` is the tree hash of
+  everything the build reads. Journal commits on main don't trigger it. First confirm that no `include_str!`,
+  path dependency or build config escapes the subdirectory.
+- **The agent runs the main checkout's working-tree script, which lags.** Re-exec `origin/main`'s copy when its
+  blob differs from `git hash-object "$0"`, with an env guard against a loop. The installer resolves the main
+  checkout through `git rev-parse --git-common-dir` and refuses when the target script doesn't exist (otherwise it exits 127 every interval).
+- **Build from `git archive` into a persistent directory.** Rsync with `-rlp --checksum --delete` and no `-t`, so unchanged files keep
+  their mtimes and cargo stays incremental. Exclude `target/` and `node_modules/`, which `--delete` then protects.
+- **Swap under `set -e`:** put every `mv` in an `if` so a failure cannot skip the rollback. Under the lock, a repair
+  loop restores an orphaned `.old.*` when the app is missing. Record a failed tree once and don't retry it every interval.
+- Under launchd, `git fetch` over SSH worked (macOS gives GUI agents `SSH_AUTH_SOCK`). Prepend cargo, pnpm and Homebrew to PATH.

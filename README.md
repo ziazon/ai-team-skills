@@ -33,6 +33,11 @@ release is a single commit, `Release vX.Y.Z`, and the plugin version in
 `.claude-plugin/plugin.json` follows semver. Pull requests would be overwritten
 by the next release, so please open an issue instead.
 
+Every push runs `.github/workflows/directory-lint.yml`: `claude plugin validate
+--strict`, then `.github/scripts/directory_lint.py`, which checks the plugin
+against the rules in Anthropic's plugin pre-submission checklist. The same lint
+runs before each release. The plugin itself runs nothing on install.
+
 ## License
 
 [MIT](LICENSE). Some skills are adapted from other MIT-licensed projects; see

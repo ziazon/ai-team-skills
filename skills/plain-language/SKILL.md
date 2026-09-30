@@ -120,6 +120,12 @@ one — *Title examples*.)
 - [ ] Engineer-only detail sits in a "Technical notes" aside, not the body.
 - [ ] Format and length match what was asked for.
 
+## Related skills
+
+- [project-manager](../project-manager/SKILL.md): ticket titles, descriptions and QA steps are written in this voice.
+- [status-update](../status-update/SKILL.md): a status report is a dashboard plus a short TLDR; this skill owns the TLDR's wording.
+- [frontend](../frontend/SKILL.md): UI copy (labels, empty, loading and error states) is written here and placed there.
+
 ## Capturing the user's voice (session-handoff protocol)
 
 Record voice/tone preferences, approved phrasings, and term→plain-language

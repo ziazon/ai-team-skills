@@ -137,6 +137,10 @@ is infrastructure.
 - [ ] Asserted success markers present AND failure markers absent; probed externally.
 - [ ] Reported the concrete evidence observed, and what remains unverified.
 
+## Related skills
+
+- [debugging-and-error-recovery](../debugging-and-error-recovery/SKILL.md): diagnosing a failure this skill's logs and signals surfaced.
+
 ## Capturing learnings (session-handoff protocol)
 
 Accumulate project knowledge in `LEARNINGS.md` beside this skill, when your copy keeps one.

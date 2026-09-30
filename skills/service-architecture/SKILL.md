@@ -70,6 +70,10 @@ The patterns behind each step, with their caveats:
   instances booting don't all write.
 - **Declaring DI wiring done on green unit tests** — see step 6.
 
+## Related skills
+
+- [deprecation-and-migration](../deprecation-and-migration/SKILL.md): the mechanics of moving logic off a legacy service once this skill has decided where it lands.
+
 ## Capturing learnings
 
 Record architectural decisions, the reasoning, patterns adopted and anti-patterns to

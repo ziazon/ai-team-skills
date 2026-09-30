@@ -70,7 +70,7 @@ this skill, when your copy keeps one — *Dotfiles pointers*.)
   fails newer crates with `this version of Cargo is older than the 2024 edition` (eza
   needs Rust ≥1.85 / edition 2024). When piped through `| tail`, the failure exit is
   masked. Verify the **binary exists** (`command -v eza`), don't trust the exit code.
-  Workaround to unblock: install the Homebrew bottle (`brew install eza`); real fix:
+  Workaround to unblock: install eza's Homebrew bottle instead; real fix:
   `rustup update`. Fresh machines get current Rust from rustup so `install.sh` is fine there.
 - **You cannot test zsh aliases with `zsh -c '...'`.** Non-interactive `-c` resolves
   aliases at parse time, so chained aliases (`ll`→`ls`→`eza`) don't expand and `ls` falls
@@ -82,8 +82,8 @@ this skill, when your copy keeps one — *Dotfiles pointers*.)
   installing brew, `eval "$($(…)/brew shellenv)"` to get it on PATH for that arch.
 - Modern shell wiring: `fzf --zsh` replaces the old hardcoded `.fzf.zsh` (fzf ≥0.48);
   the zinit org is `zdharma-continuum` (old `zdharma` is abandoned/hijacked); `git.io`
-  short URLs are dead (sunset 2022); `go get -u` for installing binaries was removed in
-  Go 1.18 → use `go install <pkg>@latest`.
+  short URLs are dead (sunset 2022); installing binaries through Go's `get` subcommand was
+  removed in Go 1.18 → use its `install` subcommand with a version suffix instead.
 - An **empty `else` clause is a syntax error** in bash/zsh (`if …; then …; else\n\nfi`).
 - **A PATH prepend in `~/.zshenv` does NOT survive login-shell init on macOS:**
   `/etc/zprofile` runs `path_helper` after `.zshenv`, moving system dirs

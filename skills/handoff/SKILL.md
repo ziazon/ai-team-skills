@@ -524,6 +524,10 @@ session can't finish its own handoff.
       prompt where the surface can't show one, self-contained either way
 - [ ] Session archived (last action)
 
+## Related skills
+
+- [status-update](../status-update/SKILL.md): a dashboard may sit inside the handoff record; it never replaces it.
+
 ## Capturing learnings (session-handoff protocol)
 
 Accumulate handoff-quality lessons in `LEARNINGS.md` beside this skill, when your copy

@@ -242,6 +242,14 @@ list for every future session.
 - [ ] Progress table + lifecycle trackers current; finished plan archived with an execution record
 - [ ] Any mid-stream question was recorded as a planning miss in LEARNINGS.md
 
+## Related skills
+
+- [idea-refine](../idea-refine/SKILL.md): when the idea itself is still vague, refine it there first; its one-pager is this skill's input.
+- [project-manager](../project-manager/SKILL.md): a plan is linked to its ticket; that skill makes sure the ticket exists and reads well.
+- [information-architecture](../information-architecture/SKILL.md): where content, pages and nav items live is a plan-time decision; lock it in the batched question round.
+- [security-and-hardening](../security-and-hardening/SKILL.md): its "Ask first" list is a plan-time question set; fold it into the same round.
+- [source-driven-development](../source-driven-development/SKILL.md): a docs-vs-codebase conflict is raised here, at plan time, not mid-build.
+
 ## Capturing learnings (session-handoff protocol)
 
 Accumulate planning lessons in `LEARNINGS.md` beside this skill, when your copy keeps

@@ -397,6 +397,11 @@ land or WIP-commit the in-flight unit first.
 - [ ] You ran the final integration review and the full diff was shown inline
 - [ ] Program state / resume point saved to memory if the work continues
 
+## Related skills
+
+- [tdd-skill](../tdd-skill/SKILL.md): what to check when a delegate wrote the tests as well as the code.
+- [security-and-hardening](../security-and-hardening/SKILL.md): keep credentials out of briefs; a sandboxed delegate with no network is a feature.
+
 ## Capturing learnings (session-handoff protocol)
 
 Accumulate orchestration lessons in `LEARNINGS.md` beside this skill, when your copy

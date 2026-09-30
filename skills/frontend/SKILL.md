@@ -155,6 +155,10 @@ Each of these ships a green build and a plausible-looking screenshot.
 - [ ] Inline screenshots shared for anything visual.
 - [ ] Lint + build green; no new vue-tsc errors in changed files.
 
+## Related skills
+
+- [plain-language](../plain-language/SKILL.md): the words inside empty, loading and error states, and every other UI label.
+
 ## Capturing learnings
 
 Accumulate frontend conventions and the user's taste as you go, in the learnings files. The

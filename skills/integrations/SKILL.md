@@ -166,6 +166,10 @@ framed as a concrete feature request. Future integrations get easier.
 - [ ] Result verified through a second channel (read-back), not just the write's response.
 - [ ] New quirks recorded per the protocol below.
 
+## Related skills
+
+- [security-and-hardening](../security-and-hardening/SKILL.md): a new integration or inbound webhook is a security trigger path; secrets handling follows that skill.
+
 ## Capturing learnings (session-handoff protocol)
 
 Accumulate per-service quirks, auth notes, and reusable patterns in `LEARNINGS.md` beside

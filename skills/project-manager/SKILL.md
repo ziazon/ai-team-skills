@@ -216,6 +216,11 @@ Other projects: record their workflow in pm-config and follow it the same way.
 - [ ] Statuses reflect reality — nothing moved to QA/Staging before it's live.
 - [ ] pm-config and LEARNINGS updated with any new convention learned.
 
+## Related skills
+
+- [planning](../planning/SKILL.md): a plan links to the ticket this skill makes sure exists.
+- [plain-language](../plain-language/SKILL.md): every ticket title, description and QA step is written in its voice.
+
 ## Capturing learnings (session-handoff protocol)
 
 Record reusable PM conventions in `LEARNINGS.md` beside this skill, when your copy

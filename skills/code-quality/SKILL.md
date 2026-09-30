@@ -381,6 +381,11 @@ originating PR*.)
 - New durable traps/conventions from this pass are captured in `LEARNINGS.md`
   beside this skill, when your copy keeps one.
 
+## Related skills
+
+- [deprecation-and-migration](../deprecation-and-migration/SKILL.md): removing something that still has consumers is a migration, not a cleanup.
+- [security-and-hardening](../security-and-hardening/SKILL.md): its dependency-intake checklist runs alongside the pre-add gate here.
+
 ## Capturing learnings (session-handoff protocol)
 
 Accumulate durable, project-specific quality knowledge in `LEARNINGS.md` beside this

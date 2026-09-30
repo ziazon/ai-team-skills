@@ -184,3 +184,8 @@ After implementing with source-driven development:
 - [ ] No deprecated APIs are used (checked against migration guides)
 - [ ] Conflicts between docs and existing code were surfaced to the user at plan time (one batched question round), not mid-implementation
 - [ ] Anything that could not be verified is explicitly flagged as unverified
+
+## Related skills
+
+- [planning](../planning/SKILL.md): a conflict between the docs and the existing code is raised in the plan's question round.
+- [debugging-and-error-recovery](../debugging-and-error-recovery/SKILL.md): the same verify-against-source rule, applied to a failure.

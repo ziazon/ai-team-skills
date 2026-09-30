@@ -178,3 +178,7 @@ After completing an ideation session:
 - [ ] A "Not Doing" list makes trade-offs explicit
 - [ ] The output is a concrete artifact (markdown one-pager), not just conversation
 - [ ] The user confirmed the final direction before any implementation work
+
+## Related skills
+
+- [information-architecture](../information-architecture/SKILL.md): "who is this for" is the same audience question IA starts from; carry the answer forward.

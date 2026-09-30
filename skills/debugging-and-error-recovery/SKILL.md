@@ -166,3 +166,7 @@ After fixing a bug:
 - [ ] All existing tests pass
 - [ ] Build succeeds
 - [ ] The original bug scenario is verified end-to-end
+
+## Related skills
+
+- [source-driven-development](../source-driven-development/SKILL.md): verify library behavior against the installed source and docs, never from memory.

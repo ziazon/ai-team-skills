@@ -162,3 +162,9 @@ Run this on any content page addition/change, and as a periodic audit:
   or accidentally undo them.
 
 Per-lesson history lives in `LEARNINGS.md` beside this skill, when your copy keeps one.
+
+## Related skills
+
+- [planning](../planning/SKILL.md): a placement decision is a plan-time decision; it belongs in the plan's single question round.
+- [research-methods](../research-methods/SKILL.md): long papers and institutional documents (definitions up front, a roles-and-responsibilities spine) take their structure from here.
+- [data-analytics](../data-analytics/SKILL.md): that skill decides which metrics a dashboard shows; this one decides where the dashboard and each figure sit.

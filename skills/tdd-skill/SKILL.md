@@ -354,6 +354,13 @@ Skip trivial passthroughs and pure config; a test there is noise.
 - Don't re-run a clean suite as reassurance — a repeat run on unchanged code
   proves nothing. Re-run after subsequent edits, not to feel better.
 
+## Related skills
+
+- [debugging-and-error-recovery](../debugging-and-error-recovery/SKILL.md): a bug fix starts with the failing regression test written here.
+- [database-optimization](../database-optimization/SKILL.md): a DB-touching change needs a real-database run; that skill says how to live-verify a query.
+- [orchestration](../orchestration/SKILL.md): review a delegate's tests as adversarially as its implementation.
+- [monitoring](../monitoring/SKILL.md): when a unit test cannot see the behavior, verify it on the live stack.
+
 ## Capturing learnings (session-handoff protocol)
 
 This skill accumulates project-specific testing knowledge in `LEARNINGS.md` beside this

@@ -63,6 +63,10 @@ End with a short close-out summary: what landed (with PR/commit refs), the
 Skills Review verdicts, any learnings appended, and confirmation the
 environment is down and the session is archived. No code-block prompt, no chip.
 
+## Related skills
+
+- [status-update](../status-update/SKILL.md): a close-out covering several units may carry a dashboard; it never replaces the record.
+
 ## Capturing learnings
 
 Close-out lessons share mechanics with handoff — append them to

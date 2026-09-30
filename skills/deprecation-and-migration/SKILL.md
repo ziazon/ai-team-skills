@@ -248,3 +248,10 @@ After a database schema migration:
 - [ ] Old and new code are both valid against the schema at every deploy step
 - [ ] Each migration has a tested down path; backfills run in throttled batches
 - [ ] Destructive steps (drop/rename) ship in their own deploy after no code references the old shape
+
+## Related skills
+
+- [service-architecture](../service-architecture/SKILL.md): a strangler migration's destination (which service owns the logic) is decided there.
+- [code-quality](../code-quality/SKILL.md): the proof that nothing still consumes the old path before it is deleted.
+- [database-optimization](../database-optimization/SKILL.md): expand/contract schema steps and an honest, tested down path.
+- [infrastructure](../infrastructure/SKILL.md): removing a feature flag, and the dead code behind it, once the migration completes.

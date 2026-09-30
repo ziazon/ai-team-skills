@@ -182,6 +182,10 @@ discipline is: learn the layout, mirror conventions, validate before apply.
 - [ ] Verified from a clean state in the environment that actually runs it.
 - [ ] New setups/gotchas recorded per the protocol below.
 
+## Related skills
+
+- [security-and-hardening](../security-and-hardening/SKILL.md): what CI, container and secrets changes must guarantee, and where each control fires.
+
 ## Capturing learnings (session-handoff protocol)
 
 Accumulate the user's infra preferences and dev-workflow knowledge in `LEARNINGS.md`

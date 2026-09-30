@@ -38,7 +38,7 @@ the right-hand column names the kind of mechanism, not a particular tool.
 | When | Control | Enforced by |
 | --- | --- | --- |
 | Every `git commit` / `git push`, any session, any repo | secret scan (e.g. gitleaks) — **denies** on a finding, prints `rule file:line` only, never the value | your pre-commit / pre-push secret-scan hook |
-| Every `pnpm add` / `npm install <pkg>` / `pip install <pkg>` / `cargo add` / `go get` … | dependency-intake checklist (advisory — never blocks, never asks) | a hook that prints the *Dependency intake* checklist below when a package is added |
+| Every `pnpm add` / `npm install <pkg>` / `pip install <pkg>` / `cargo add` / the Go equivalent … | dependency-intake checklist (advisory — never blocks, never asks) | a hook that prints the *Dependency intake* checklist below when a package is added |
 | Any command that would print a secret value | secret-leak guard — denies | a pre-command hook |
 | Every PR, before merge | `/security-review` (or equivalent) on the diff; each finding resolved or explicitly accepted in the PR record | the per-PR review gate |
 | A PR on a **trigger path** (below) | a second, independent reviewer in addition to the review; any brief to an implementing agent cites this file | the per-PR review gate + the planning gate |
@@ -138,7 +138,7 @@ it fires:
   allowlisted.
 - **Fail-open is loud.** If gitleaks is missing or errors, the command goes through with a
   `secret-scan:` warning saying it was **NOT** scanned. That warning is a stop, not noise:
-  `brew install gitleaks`, then scan by hand before pushing.
+  install gitleaks (Homebrew packages it), then scan by hand before pushing.
 
 **By hand, where the hook is not in the path** (a script, another agent, CI):
 `gitleaks git --pre-commit --staged --redact --no-banner` before a commit · `gitleaks git
@@ -312,6 +312,14 @@ the PR. Keep them in step.
 ## Residual one-liners
 
 - **Don't trust the file extension** — check magic bytes when it matters.
+
+## Related skills
+
+- [planning](../planning/SKILL.md): the "Ask first" list above joins the plan's single batched question round.
+- [infrastructure](../infrastructure/SKILL.md): CI, Dockerfiles, Action pinning and secrets boundaries are built there; this skill says what they must guarantee.
+- [integrations](../integrations/SKILL.md): a new external integration or inbound webhook is a trigger path for the Verifier.
+- [code-quality](../code-quality/SKILL.md): its pre-add gate asks whether a dependency is needed at all; the intake checklist here asks whether it is safe.
+- [orchestration](../orchestration/SKILL.md): a brief that needs a credential is a brief to split.
 
 ## Capturing learnings
 

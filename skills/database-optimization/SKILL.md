@@ -213,6 +213,12 @@ Read the matching file before working in its area:
 - [ ] Perf claims backed by before/after `EXPLAIN (ANALYZE, BUFFERS)` on clean data.
 - [ ] Schema/view changes carry their generated migration.
 
+## Related skills
+
+- [tdd-skill](../tdd-skill/SKILL.md): mocked green is necessary, not sufficient; a DB-touching change gets a real-database run.
+- [deprecation-and-migration](../deprecation-and-migration/SKILL.md): shared-table expand/contract changes, where old and new code hit the DB at once.
+- [data-analytics](../data-analytics/SKILL.md): the metrics and dashboards whose queries this skill makes fast.
+
 ## Capturing learnings (session-handoff protocol)
 
 Accumulate query/schema tuning knowledge in `LEARNINGS.md` beside this skill, when your

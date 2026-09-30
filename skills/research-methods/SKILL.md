@@ -167,6 +167,10 @@ Massey & Denton; Bates (2013); Desmond (2012); Ozer et al. (2020); Zellner & Mas
 - [ ] Literature claims are backed by **peer-reviewed, DOI-linked sources mapped to the
       specific construct/node** they support.
 
+## Related skills
+
+- [information-architecture](../information-architecture/SKILL.md): the structure of a long paper or institutional document: audience, thesis, section order.
+
 ## Capturing learnings
 
 Record new methods, framework choices, instrument designs, IRB/AAHRPP specifics, and

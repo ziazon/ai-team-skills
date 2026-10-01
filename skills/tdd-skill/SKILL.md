@@ -33,7 +33,7 @@ Code that merely compiles/loads is not proof.
 ## Step 0 — discover how this project tests (do this first, every repo)
 
 Don't assume a command — a wrong runner wastes the whole loop on tooling noise
-(e.g. bare `npx jest` in a package can pick up the wrong root config and die on
+(e.g. running jest bare from inside a package can pick up the wrong root config and die on
 plain TS). Consult the **project-config** skill's reference file first; if the
 facts aren't recorded there, discover them once and record them (its
 record-on-miss rule). What you need before writing any test:
@@ -126,7 +126,7 @@ Every rail here is a run that reported success while proving nothing.
   output and exit code from the *same* run.
 - **`cmd | tail` reports the PIPE's status, not the tool's**, and truncates away the
   summary block that proves the run completed. Redirect and read the code directly:
-  `npx vitest run > /tmp/out.log 2>&1; echo "EXIT=$?"`. Same trap wrapping in
+  `<test command> > /tmp/out.log 2>&1; echo "EXIT=$?"`. Same trap wrapping in
   `timeout` — a killed run looks identical to a passing one from the tail alone.
 - **A file that dies at import passes vacuously.** `Tests 31 passed (31)` printed
   beside `ProfileView.spec.ts (0 test)`, exit 1. Grep for `0 test`; read `Test

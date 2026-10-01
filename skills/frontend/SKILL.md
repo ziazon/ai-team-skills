@@ -80,7 +80,7 @@ a hand-rolled localStorage helper, a bespoke table) is a review reject even when
    branch is already red under the type-checker (vue-tsc), the bar is "no NEW errors in
    my files" (this install's baseline: `LOCAL.md` beside this skill, when your copy keeps
    one — *Checks baseline*).
-5. **Gate with PARALLEL vitest, the way CI runs it** (`npx vitest run` — never
+5. **Gate with PARALLEL vitest, the way CI runs it** (plain `vitest run` — never
    `--no-file-parallelism` as the merge gate). A services↔stores barrel import cycle
    only threw when the module graph was entered service-first, i.e. under CI's parallel
    run, and stayed invisible to every local serial run.

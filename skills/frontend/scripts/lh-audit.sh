@@ -14,7 +14,7 @@
 #   lh-audit.sh http://127.0.0.1:8083/ both ./.lighthouse
 #
 # Requires: node, Google Chrome, and the `lighthouse` CLI on PATH (install it
-# yourself, e.g. `npm install -g lighthouse`; this script never downloads it).
+# yourself, e.g. `npm install -g lighthouse@13.5.0`; this script never downloads it).
 # Outputs timestamped JSON + HTML per form-factor into <outdir> and prints:
 #   category scores (Perf/A11y/BP/SEO), the Core Web Vitals metrics, and the top
 #   opportunities/diagnostics ranked by estimated savings.
@@ -28,7 +28,7 @@ STAMP="$(date +%Y%m%d-%H%M%S)"
 SLUG="$(printf '%s' "$URL" | sed -E 's#https?://##; s#[^a-zA-Z0-9]+#-#g; s#-+$##')"
 
 command -v lighthouse >/dev/null 2>&1 || {
-  echo "lh-audit.sh: the lighthouse CLI is not on PATH; install it first (e.g. npm install -g lighthouse)" >&2
+  echo "lh-audit.sh: the lighthouse CLI is not on PATH; install it first (e.g. npm install -g lighthouse@13.5.0)" >&2
   exit 1
 }
 
